@@ -20,6 +20,7 @@ class Config:
 co=ChromiumOptions()
 
 #-启动配置
+#浏览器路径
 #端口
 #代理地址
 #UA
@@ -44,11 +45,13 @@ test=input('继续 ?')
 var init_ConfigDict = {  
   'title':"#骚神",
   '端口':'',
+  '浏览器路径':'',
   '静音':'',
   'UA':'',
   '代理地址':'',
   '启动网址':'page.get("http://gitee.com")',
   'cookie':''
+
   
 };
 
@@ -141,10 +144,12 @@ function update_config_dict(){
   let cookie=getTextValue('set_cookie');
   let  proxy=getTextValue('set_proxy');
   let  ua=getSelectValue('ua')
+  let browser=getTextValue('set_browser')
 
               
   if(duankou.length>0 )ConfigDict['端口']= `co.set_local_port(${duankou})`;            
   if(url.includes('http') ) ConfigDict['启动网址']= `page.get("${url}")`;            
+  if(browser.includes('.exe') ) ConfigDict['浏览器路径']= `co.set_browser_path(r"${browser}")`;            
   if(proxy.includes('http') ) ConfigDict['代理地址']= `co.set_proxy("${proxy}")`;            
   if(cookie.includes('=') ) ConfigDict['cookie']= `page.set.cookies(r"${cookie}")`;            
   if(ua.includes('安卓') ) ConfigDict['UA']= `co.set_user_agent(Config.UA_android)`;            
@@ -187,3 +192,7 @@ document.getElementById('reset_config').addEventListener('click', function () {
   location.reload();
 
 });  
+
+
+//浏览器选择处理
+

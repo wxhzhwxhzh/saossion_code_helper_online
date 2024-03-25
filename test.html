@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>选择文件并显示文件路径</title>
+<style>
+    #fileInput {
+        display: none;
+    }
+</style>
+</head>
+<body>
+    <input type="file" id="fileInput" onchange="displayFilePath()">
+    <button onclick="document.getElementById('fileInput').click()">选择文件</button>
+    <label id="filePathLabel"></label>
+
+    <script>
+        function displayFilePath() {
+            const fileInput = document.getElementById('fileInput');
+            const filePathLabel = document.getElementById('filePathLabel');
+            
+            if (fileInput.files.length > 0) {
+                filePathLabel.innerText = "文件路径：" + fileInput.value;
+            } else {
+                filePathLabel.innerText = "没有选择文件";
+            }
+        }
+    </script>
+</body>
+</html>
