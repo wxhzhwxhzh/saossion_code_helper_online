@@ -1,140 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>骚神库代码生成助手</title>
+    <title>骚神库新手入门教学</title>
+
+    <!-- 多标签页引用 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- 字体引用 -->
     <link href="css/code_helper.css" rel="stylesheet">
-    <link rel="stylesheet"   href="https://fonts.googleapis.com/css?family=Fira code:bi|Inconsolata:bi|Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira code:bi|Inconsolata:bi|Oswald">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Iosevka&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');      
-    
-    
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap');
+
+
         body {
             font-family: 'Oswald', sans-serif;
         }
     </style>
+
+
 </head>
+
 <body>
-   <div id="main_tab">
+    <div id="main_tab">
 
-    <div class="yi_hang">
+        <!-- 首行标题栏 -->
+        <div class="yi_hang">
 
-        <a target="ghelper" href="http://g1879.gitee.io/drissionpagedocs/">
-            <img id="saologo" src="img/saoshen.png" ></a>
-        <h1 style="color: rgb(43, 14, 172);">代码生成助手 网页版 1.2</h1>
+            <a target="ghelper" href="http://g1879.gitee.io/drissionpagedocs/">
+                <img id="saologo" src="img/saoshen.png"></a>
+            <h1 style="color: rgb(43, 14, 172);">DrissionPage 新手入门教学 工具大全</h1>
 
-        <div id="dateTimeDisplay" style="margin:10px 50px 10px 300px; font-size: xx-large;color: rgb(185, 4, 4);">.</div>
-        
+            <div id="dateTimeDisplay" style="margin:10px 50px 10px 100px; font-size: xx-large;color: rgb(185, 4, 4);">.
+            </div>
+
+        </div>
+
+
+
+        <!-- 标签组栏   -->
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#home" data-toggle="tab">
+                    代码生成助手
+                </a>
+            </li>
+            <li><a href="#yufazhuanhuan" data-toggle="tab">元素语法转换工具</a></li>
+            <li><a href="#listen_data" data-toggle="tab" style="font-weight: bold;">数据监听工具</a></li>
+            <li><a href="#listen_data" data-toggle="tab" style="font-weight: bold;">鼠标键盘工具</a></li>
+            <li><a href="#listen_data" data-toggle="tab" style="font-weight: bold;">浏览器插件工具</a></li>
+            <li><a href="#v_help" data-toggle="tab" style="font-weight: bold;">DP库入门视频教学</a></li>
+            <li><a href="#help" data-toggle="tab" style="font-weight: bold;">使用帮助</a></li>
+
+        </ul>
+
+        <!-- 标签第一组 -->
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="home" style="background-color:rgb(126, 125, 125);padding: 10px;">
+                <p>代码生成助手 1.2版本</p>
+                <div class="yi_hang">
+                    ChromePage 模式
+                </div>
+
+                <div class="yi_hang">
+                    浏览器关联
+                    <input type="radio" id="option1" name="options" value="option1" checked>
+                    <label for="option1">自动选择</label>
+
+                    <input type="radio" id="option2" name="options" value="option2">
+                    <label for="option2">手动选择</label>
+
+                    <input type="radio" id="option3" name="options" value="option3">
+                    <label for="option3">指纹浏览器</label>
+
+
+                </div>
+
+                <div class="yi_hang">
+                    <span class="label1">指定浏览器路径：</span>
+
+                    <input id="set_browser" class="input_button1" type="text" placeholder="默认为空是本地谷歌浏览器"
+                        style="width: 350px;">
+
+                </div>
+
+                <div class="yi_hang">
+                    <span style="margin-right: 15px;">启动前设置</span>
+
+
+                    <input type="checkbox" id="wutou" name="checkbox" value="check1">
+                    <label for="check1">无头</label>
+
+
+                    <input type="checkbox" id="jingyin" name="checkbox" value="check2">
+                    <label for="check2">静音</label>
+
+
+                    <input type="checkbox" id="duokai" name="checkbox" value="check3">
+                    <label for="check3">多开</label>
+
+                    <input type="checkbox" id="hulue" name="checkbox" value="check4">
+                    <label for="check4">忽略证书错误</label>
+
+                    <input type="checkbox" id="nojs" name="checkbox" value="check5">
+                    <label for="check5">无JS</label>
+
+                </div>
+
+                <div class="yi_hang">
+                    <span class="label1">UA设置</span>
+
+                    <select id="ua">
+                        <option value="option1">PC</option>
+                        <option value="option2">苹果</option>
+                        <option value="option3">安卓</option>
+                    </select>
+
+                </div>
+
+                <div class="yi_hang">
+                    <span class="label1">代理地址</span>
+
+                    <input id="set_proxy" class="input_button1" type="text" placeholder="http://ip:port">
+
+                </div>
+                <div class="yi_hang">
+                    <span class="label1">设置Cookie</span>
+
+                    <input id="set_cookie" class="input_button1" type="text"
+                        placeholder="格式是 name1=value1; name2=value2; path=/; domain=.example.com">
+
+                </div>
+
+                <div class="yi_hang">
+                    <span class="label1">启动端口</span>
+
+                    <input id="set_port" class="input_button1" type="text" placeholder="默认端口是9222"
+                        style="width: 150px;">
+
+                </div>
+
+                <div class="yi_hang">
+                    <span class="label1">启动网址</span>
+
+                    <input id="set_url" class="input_button1" type="text" placeholder="必须是http开头"
+                        value="https://gitee.com/g1879/DrissionPage">
+
+                </div>
+
+
+                <br>
+
+                <br>
+                <hr>
+
+
+                <button id="shengcheng" class="start_button" type="button">生成启动代码</button>
+                <button id="show_config" class="start_button" type="button">预览配置</button>
+                <button id="reset_config" class="start_button" type="button"
+                    style="background-color: crimson;">重置</button>
+
+                <button id="copy_code" class="red_button" type="button"
+                    style="background-color:rgb(12, 150, 120);">复制下面的代码</button>
+
+                <br>
+
+
+                <textarea id="wenben" rows="20" placeholder="文本框">空的</textarea>
+
+
+            </div>
+
+
+
+
+
+
+            <div class="tab-pane fade" id="yufazhuanhuan">
+                <p>开发中6..</p>
+            </div>
+
+
+
+
+            <div class="tab-pane fade" id="listen_data">
+                <p>开发中..77</p>
+            </div>
+
+
+            <div class="tab-pane fade" id="v_help">
+                <p>视频教学中心</p>
+               
+                <iframe src="//player.bilibili.com/player.html?aid=1552020311&bvid=BV1j1421Q7EM&cid=1480776081&p=1" scrolling="no" border="0" frameborder="no" width="400px" height="400px" framespacing="0" allowfullscreen="true"> </iframe>
+            </div>
+            
+            <div class="tab-pane fade" id="help">
+                <p>帮助中心</p>
+            </div>
+
+            <div class="tab-pane fade" id="jmeter">
+                <p>开发中.....</p>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="tab-pane fade" id="ejb">
+                <p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
+                </p>
+            </div>
+        </div>
+
+
+
 
     </div>
-    <hr>
 
-    <div class="yi_hang">
-    ChromePage 模式  
-    </div>
-
-    <div class="yi_hang">
-        浏览器关联    
-        <input type="radio" id="option1" name="options" value="option1" checked>
-        <label for="option1">自动选择</label>
-    
-        <input type="radio" id="option2" name="options" value="option2">
-        <label for="option2">手动选择</label>
-    
-        <input type="radio" id="option3" name="options" value="option3">
-        <label for="option3">指纹浏览器</label>
-    
-    
-    </div>
-    
-    <div class="yi_hang">
-        <span class="label1">指定浏览器路径：</span>
-
-        <input id="set_browser" class="input_button1"  type="text" placeholder="默认为空是本地谷歌浏览器" style="width: 350px;" >
-
-    </div>
-
-    <div class="yi_hang">
-        <span style="margin-right: 15px;">启动前设置</span>
-    
-        
-        <input type="checkbox" id="wutou" name="checkbox" value="check1">
-        <label for="check1">无头</label>
-        
-        
-        <input type="checkbox" id="jingyin" name="checkbox" value="check2">
-        <label for="check2">静音</label>
-        
-        
-        <input type="checkbox" id="duokai" name="checkbox" value="check3">
-        <label for="check3">多开</label>
-
-        <input type="checkbox" id="hulue" name="checkbox" value="check4">
-        <label for="check4">忽略证书错误</label>
-        
-        <input type="checkbox" id="nojs" name="checkbox" value="check5">
-        <label for="check5">无JS</label>
-    
-    </div>
-
-    <div class="yi_hang">
-        <span class="label1">UA设置</span>
-    
-        <select id="ua" >
-            <option value="option1" >PC</option>
-            <option value="option2">苹果</option>
-            <option value="option3">安卓</option>
-        </select>
-    
-    </div>
-
-    <div class="yi_hang">
-        <span class="label1">代理地址</span>
-
-        <input id="set_proxy" class="input_button1"  type="text" placeholder="http://ip:port">
-
-    </div>
-    <div class="yi_hang">
-        <span class="label1" >设置Cookie</span>
-
-        <input id="set_cookie" class="input_button1" type="text" placeholder="格式是 name1=value1; name2=value2; path=/; domain=.example.com">
-
-    </div>
-
-    <div class="yi_hang">
-        <span class="label1">启动端口</span>
-
-        <input id="set_port" class="input_button1"  type="text" placeholder="默认端口是9222" style="width: 150px;" >
-
-    </div>
-
-    <div class="yi_hang">
-        <span class="label1">启动网址</span>
-
-        <input id="set_url" class="input_button1" type="text" placeholder="必须是http开头" value="https://gitee.com/g1879/DrissionPage">
-
-    </div>
-
-
-    <br>
-    <hr>
-
-    
-    <button id="shengcheng" class="start_button" type="button" >生成启动代码</button>
-    <button id="show_config" class="start_button" type="button">预览配置</button>
-    <button id="reset_config" class="start_button" type="button" style="background-color: crimson;">重置</button>
-    
-    <button id="copy_code"  class="red_button" type="button" style="background-color:rgb(12, 150, 120);" >复制下面的代码</button>
-
-    <br>
-   
-
-    <textarea  id="wenben" rows="20"  placeholder="文本框">空的</textarea>
-
-   </div>
-
-   <script src="js/code_helper.js"></script>
+    <script src="js/code_helper.js"></script>
 </body>
+
 </html>
