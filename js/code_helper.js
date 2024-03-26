@@ -93,18 +93,17 @@ copyCodeButton.addEventListener('click', function() {
 
     textarea.select();
     document.execCommand('copy');
-    alert('代码文本已成功复制到剪贴板！');
+    alert('代码文本已成功复制到剪贴板--！');
 });  
 
-//实时更新时间
 function updateDateTime() {
   var now = new Date();
   var year = now.getFullYear();
-  var month = now.getMonth() + 1; // 月份是从 0 开始计数的，所以需要加 1
-  var day = now.getDate();
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
+  var month = ('0' + (now.getMonth() + 1)).slice(-2); // 在个位数月份前添加 '0'
+  var day = ('0' + now.getDate()).slice(-2); // 在个位数日期前添加 '0'
+  var hours = ('0' + now.getHours()).slice(-2); // 在个位数小时前添加 '0'
+  var minutes = ('0' + now.getMinutes()).slice(-2); // 在个位数分钟前添加 '0'
+  var seconds = ('0' + now.getSeconds()).slice(-2); // 在个位数秒前添加 '0'
   
   var dateTimeString = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
   
