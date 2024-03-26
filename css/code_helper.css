@@ -12,7 +12,7 @@ body {
 
 #main_tab{
     width: 80%;
-    font-family: Jetbrains mono;
+    /* font-family: Jetbrains mono; */
     font-size: 14px;
         
 }
@@ -33,7 +33,7 @@ body {
 
 #wenben{
     width: 100%;
-    font-family: fira code, monospace;
+    font-family: iosevka, monospace;
     background-color: #333;
     color: rgb(243, 245, 243);
 }
