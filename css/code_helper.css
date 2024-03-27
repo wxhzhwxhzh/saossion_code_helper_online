@@ -19,18 +19,24 @@ body {
     height: 100%;
     background-image: url('https://images.unsplash.com/photo-1669745761807-0397cc17b0d1?ixid=M3w4ODczOHwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxMTUxNjU3NXw&ixlib=rb-4.0.3&w=1920&h=1080&dpr=1&auto=format&q=75&fit=crop');
     background-size: cover;
-    filter: blur(10px); /* 调整模糊程度，数值越大，模糊程度越高 */
-    filter: brightness(80%); /* 调整亮度  */
+    
+    filter: blur(3px) brightness(70%); /* 调整模糊程度，数值越大，模糊程度越高 */  /* 调整亮度  */
     z-index: -1; /* 将伪元素放在最底层 */
 }
 
   .biaoqianye{
     background-color: #f8f4f4;
     padding: 20px;
+    
+   
     }
 
+ .heise{
+  color: rgb(248, 248, 248);
+ }   
+
 #main_tab{
-    width: 80%;
+    width: 90%;
     /* font-family: Jetbrains mono; */
     font-size: 14px;
         
