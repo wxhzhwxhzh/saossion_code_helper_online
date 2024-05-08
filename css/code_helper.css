@@ -136,3 +136,10 @@ body {
   margin:2px 10px 2px 1px;
 }
 
+  /* 控制图像大小和间距 */
+  img.favicon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px; /* 可根据需要调整间距 */
+}
+
