@@ -1,47 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8"> 
-	<title>Bootstrap 实例 - 标签页（Tab）插件</title>
-	<link rel="stylesheet" href="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.net/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.net/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floating Window</title>
+<style>
+    /* 样式表 */
+    .floating-window {
+        position: absolute;
+        top: 30%; /* 调整初始位置 */
+        left: 3px; /* 调整初始位置 */
+        /* width: 300px; */
+        height: 200px;
+        border: 2px solid #7d7e80;
+		border-radius: 5px;
+        background-color: #fff;
+        z-index: 1000;
+		background-color: rgb(222, 224, 228);
+    }
+
+    .title-bar {
+        background-color: #6792c4;
+        padding: 5px;
+        cursor: move;
+    }
+
+    .close-btn {
+        float: right;
+        cursor: pointer;
+		font-size: large;
+		font-weight: bolder;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+</style>
 </head>
 <body>
-    
-    <div class="yi_hang">       
-        <h1 style="color: rgb(43, 14, 172);">Drissionpage 新手入门教学 1.2</h1>
-        <div id="dateTimeDisplay" style="margin:10px 50px 10px 300px; font-size: xx-large;color: rgb(185, 4, 4);">.</div>      
+
+<div class="floating-window" id="floatingWindow">
+    <div class="title-bar" id="titleBar">浮窗标题栏
+        <span class="close-btn" id="closeBtn">&nbsp;X&nbsp;</span>
     </div>
-    <hr>
-
-<ul id="myTab" class="nav nav-tabs">
-	<li class="active">
-		<a href="#home" data-toggle="tab">
-			 菜鸟教程
-		</a>
-	</li>
-	<li><a href="#ios" data-toggle="tab">iOS</a></li>
-	<li><a href="#ejb" data-toggle="tab" style="font-weight: bold;">DP库入门视频教学</a></li>
-
-</ul>
-
-<div id="myTabContent" class="tab-content">
-	<div class="tab-pane fade in active" id="home">
-		<p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
-	</div>
-	<div class="tab-pane fade" id="ios">
-		<p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple 
-			TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
-	</div>
-	<div class="tab-pane fade" id="jmeter">
-		<p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-	</div>
-	<div class="tab-pane fade" id="ejb">
-		<p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-		</p>
-	</div>
+    <div class="content">
+        <!-- 这里放置浮窗内容 -->
+        浮窗内容
+    </div>
 </div>
+
+<script>
+    // JavaScript
+
+    // 获取浮窗和标题栏元素
+    var floatingWindow = document.getElementById('floatingWindow');
+    var titleBar = document.getElementById('titleBar');
+
+    // 获取关闭按钮元素
+    var closeBtn = document.getElementById('closeBtn');
+
+    // 初始化鼠标位置变量
+    var offsetX, offsetY;
+
+    // 鼠标按下事件监听器
+    titleBar.addEventListener('mousedown', function(e) {
+        // 计算鼠标相对于浮窗左上角的偏移量
+        offsetX = e.clientX - floatingWindow.offsetLeft;
+        offsetY = e.clientY - floatingWindow.offsetTop;
+
+        // 添加鼠标移动和鼠标释放事件监听器
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+
+    // 鼠标移动事件处理函数
+    function onMouseMove(e) {
+        // 计算浮窗的新位置
+        var newX = e.clientX - offsetX;
+        var newY = e.clientY - offsetY;
+
+        // 更新浮窗的位置
+        floatingWindow.style.left = newX + 'px';
+        floatingWindow.style.top = newY + 'px';
+    }
+
+    // 鼠标释放事件处理函数
+    function onMouseUp() {
+        // 移除鼠标移动和鼠标释放事件监听器
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+    }
+
+    // 关闭按钮点击事件监听器
+    closeBtn.addEventListener('click', function() {
+        // 隐藏浮窗
+        floatingWindow.style.display = 'none';
+    });
+</script>
 
 </body>
 </html>
