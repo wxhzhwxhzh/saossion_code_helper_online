@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    
+        <meta charset="utf-8">
+    
+        <title>vip视频在线免费观看</title>
+    
+        <meta name="keywords"
+            content="腾讯视频vip视频解析,爱奇艺vip视频解析,优酷vip视频解析,芒果TVvip视频解析,bilibili哔哩哔哩（B站）vip视频解析,AcFun弹幕视频网（A站）vip视频解析">   
+       
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+        <link rel="stylesheet" href="css/bootstrap.css">
+    
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="playtv.js"></script>   
+
+    
+        <link rel="stylesheet" href="css/style.css">
+    
+        
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'G-19JQ8QHVFD');
+        </script>
+        <style>
+          body{
+            background-color: cadetblue;
+          }
+        </style>
+    
+    </head>
+
+<body>
+  <h1 style=" margin: 2%;">VIP 视频播放器</h1>
+  <br>
+  <hr>
+
+  <div style=" left: 20%;">
+
+
+
+    <div class="url-box" style="margin-top: 10px; width: 80%; margin: 2%;">
+      <div class="input-group">
+        <input type="text" id="url" onfocus="this.select()" class="form-control url-text"
+          aria-label="Text input with segmented button dropdown" placeholder="请复制你想要看的视频网址，粘贴到此处点击播放即可！"
+          title="请复制你想要看的视频网址，粘贴到此处点击播放即可！" autocomplete="off">
+        <div class="input-group-addon">
+          <select class="url-c url-text" title="如发现视频无法正常播放请尝试更换视频线路！" id="jk">
+            <option value="https://jx.jsonplayer.com/player/?url=" selected=""> 默认 </option>
+            <option value="https://jx.xmflv.com/?url="> 通用接口 </option>
+            <option value="https://z1.m1907.top/?jx="> 剧名/链接 </option>
+            <option value="https://www.ckplayer.vip/jiexi/?url="> 推荐四 </option>
+            <option value="https://jx.jsonplayer.com/player/?url="> 如不能播放 </option>
+            <option value="https://jx.we-vip.com/?url="> 请切换线路 </option>
+            <option value="https://jx.4kdv.com/?url="> 线路七 </option>
+            <option value="https://api.jiexi.la/?url="> 备用线 </option>
+            <option value="https://jx.qqwtt.com/?url="> 线路九 </option>
+            <option value="https://www.playm3u8.cn/jiexi.php?url="> 通用 </option>
+          </select>
+        </div>
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default btn-play" title="点击解析并开始播放" onclick="play()">解析播放</button>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="bofangqi" style="height: 500px; width: 60%; background-color: rgb(56, 54, 50); margin-left: 20%;">
+
+      <iframe id="palybox" style="height: 99%; width: 80%;"
+        src="https://jx.jsonplayer.com/player/?url=https://v.qq.com/x/cover/mzc00200tl9nvn9/j0047a185to.html"
+        allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
+
+    </div>
+
+  </div>
+
+
+</body>
+</html>
