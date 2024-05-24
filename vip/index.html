@@ -1,47 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    
-        <meta charset="utf-8">
-    
-        <title>vip视频在线免费观看</title>
-    
-        <meta name="keywords"
-            content="腾讯视频vip视频解析,爱奇艺vip视频解析,优酷vip视频解析,芒果TVvip视频解析,bilibili哔哩哔哩（B站）vip视频解析,AcFun弹幕视频网（A站）vip视频解析">   
-       
-    
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    
-        <link rel="stylesheet" href="css/bootstrap.css">
-    
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="playtv.js"></script>   
 
-    
-        <link rel="stylesheet" href="css/style.css">
-    
-        
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
+<head>
 
-            gtag('config', 'G-19JQ8QHVFD');
-        </script>
-        <style>
-          body{
-            background-color: rgb(94, 143, 143);
-          }
-        </style>
-    
-    </head>
+  <meta charset="utf-8">
+
+  <title>vip视频在线免费观看</title>
+
+  <meta name="keywords"
+    content="腾讯视频vip视频解析,爱奇艺vip视频解析,优酷vip视频解析,芒果TVvip视频解析,bilibili哔哩哔哩（B站）vip视频解析,AcFun弹幕视频网（A站）vip视频解析">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="playtv.js"></script>
+
+
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 模糊的背景图 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1669745761807-0397cc17b0d1?ixid=M3w4ODczOHwwfDF8cmFuZG9tfHx8fHx8fHx8MTcxMTUxNjU3NXw&ixlib=rb-4.0.3&w=1920&h=1080&dpr=1&auto=format&q=75&fit=crop');
+      background-size: cover;
+      filter: blur(3px) brightness(70%);
+      /* 调整模糊程度，数值越大，模糊程度越高 */
+      /* 调整亮度  */
+      z-index: -1;
+      /* 将伪元素放在最底层 */
+    }
+  </style>
+
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-19JQ8QHVFD');
+  </script>
+  <style>
+    body {
+      background-color: rgb(94, 143, 143);
+    }
+  </style>
+
+</head>
 
 <body>
   <h1 style=" margin:10px;text-align: center;">VIP 视频播放器</h1>
   <br>
   <hr>
 
-  <div style=" left: 20%;">
+  <div style=" left: 10%;">
 
 
 
@@ -71,14 +90,15 @@
     </div>
 
     <br>
-    <div class="bofangqi" style="height: 500px; width: 60%; background-color: rgb(56, 54, 50); margin-left: 20%;padding: 20px;border-radius: 3px;">
+    <div class="bofangqi"
+      style="height: 500px; width: 60%; background-color: rgb(56, 54, 50); margin-left: 20%;padding: 20px;border-radius: 3px;">
 
       <iframe id="palybox" style="height: 99%; width: 80%;"
         src="https://jx.jsonplayer.com/player/?url=https://v.qq.com/x/cover/mzc00200tl9nvn9/j0047a185to.html"
         allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen="true"></iframe>
 
     </div>
-    
+
   </div>
   <hr>
   <div style="display: flex;bottom: 0%;background-color: chocolate;"> <a href="http://v.qq.com">腾讯视频</a></div>
@@ -86,4 +106,5 @@
 
 
 </body>
+
 </html>
