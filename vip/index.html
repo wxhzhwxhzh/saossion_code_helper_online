@@ -53,10 +53,26 @@
     }
 
     .item {
-      /* 这里是子元素的样式 */
-      margin: 10px;
-      /* 可选：增加子元素之间的间距 */
-    }
+  margin: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease; /* 添加过渡效果 */
+
+  /* 设置初始状态 */
+  transform: scale(1);
+  box-shadow: none;
+  color: #000;
+  font-size: larger;
+  padding: auto;
+  border: 2px;
+}
+
+.item:hover {
+  transform: scale(1.5); /* 悬停时放大元素 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 悬停时添加阴影效果 */
+  color: #ff0000; /* 悬停时改变文字颜色 */
+  border-color: blue;
+
+}
+
   </style>
 
 
@@ -77,7 +93,13 @@
 
 <body>
   <h1 style=" margin:10px;text-align: center; font-family:Verdana, Geneva, Tahoma, sans-serif;">VIP 视频播放器</h1>
-  <br>
+  <div  style="color: antiquewhite; background-color: rgba(175, 175, 170, 0.685);padding: 10px;">
+    <a class="item" href="https://v.qq.com/" target="_blank">腾讯视频</a>
+    <a class="item" href="https://www.iqiyi.com/" target="_blank">爱奇艺</a>
+    <a class="item" href="https://www.bilibili.com/" target="_blank">B站</a>
+    <a class="item" href="https://dianyi.ng/" target="_blank">电影.先生</a>    
+   
+  </div>
   <hr>
 
   <div class="container">
@@ -134,7 +156,9 @@
 
     </div>
 
+    
   </div>
+  
 
 
 </body>
