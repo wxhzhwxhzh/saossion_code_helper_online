@@ -331,7 +331,11 @@ document.getElementById("ua").addEventListener("change", function() {
             break;
         case "7":
             console.log("人类鼠标模拟");
-            update_code(window.human_mouse)
+            update_code(code_frame.human_mouse)
+            break;
+        case "8":
+            console.log("ntp");
+            update_code(code_frame.ntp);
             break;
 
         default:
