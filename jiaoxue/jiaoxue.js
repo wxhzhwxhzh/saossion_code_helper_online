@@ -163,6 +163,111 @@ if __name__ == '__main__':
 window.debug_browser=`
 "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"  --remote-debugging-port=7878 --remote-allow-origins=*
 `
+window.jianting_danmu=`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+
+
+#-导入库
+import time
+from DrissionPage import ChromiumPage,ChromiumOptions
+
+#-配置类
+class Config:
+
+    url='https://live.douyin.com/318792010779'
+    port=7878
+
+
+#-创建配置对象
+co=ChromiumOptions()
+
+#-启动配置
+co.set_local_port(Config.port)
+co.ignore_certificate_errors(True)
+
+#-创建浏览器
+page = ChromiumPage(addr_or_opts=co)
+#-创建标签页
+tab=page.new_tab()
+
+
+
+#-打开网址
+tab.get(Config.url)
+
+js_code='''
+window.danmu=  new Array();
+// 选择目标节点
+var targetNode = document.querySelector('.webcast-chatroom___item-offset');
+
+
+// 配置观察选项
+var config = { childList: true, subtree: true, characterData: true };
+
+// 创建一个回调函数来处理变化
+var callback = function(mutationsList) {
+    for (var mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE) {
+                    var currentTime = new Date().toLocaleString();
+                    var newText = currentTime + ' - ' + node.textContent; // 在新增的字符串前加上实时的日期时间
+                    console.log('New text added: ', newText);
+                    window.danmu.push(newText);
+                } else {
+                    var currentTime = new Date().toLocaleString();
+                    var newText = currentTime + ' - ' + (node.innerText || node.textContent); // 在新增的字符串前加上实时的日期时间
+                    console.log('New element added with text: ', newText);
+                    window.danmu.push(newText);
+                }
+            });
+        } else if (mutation.type === 'characterData') {
+            var currentTime = new Date().toLocaleString();
+            var newText = currentTime + ' - ' + mutation.target.data; // 在新增的字符串前加上实时的日期时间
+            console.log('Character data changed: ', newText);
+            window.danmu.push(newText);
+        }
+    }
+};
+
+// 创建一个MutationObserver实例并传入回调函数
+var observer = new MutationObserver(callback);
+
+// 开始观察目标节点
+observer.observe(targetNode, config);
+
+// 停止观察（如有需要）
+// observer.disconnect();
+
+'''
+
+tab.wait(5)
+tab.run_js(js_code)
+
+
+# global danmu_list
+danmu_list=tab.run_js( 'return window.danmu')
+
+
+#每过3秒就打印出弹幕列表里新增的内容
+while True:
+    time.sleep(3)
+    old_danmu_list=danmu_list
+    danmu_list=tab.run_js( 'return window.danmu')
+    old_len=len(old_danmu_list)
+    new_len=len(danmu_list)
+    if new_len>old_len:
+        for item in  range(new_len-old_len):
+            print(danmu_list[old_len+item])
+
+
+
+
+`
+
+
 function update_code(code){
     document.getElementById('wenben').value='生成中..';
     setTimeout(() => {
@@ -175,38 +280,54 @@ update_code(window.init_browser);
 document.getElementById("ua").addEventListener("change", function() {
     var selectedValue = this.value;
     switch (selectedValue) {
-        case "option1":
+        case "1":
             console.log("启动接管浏览器");
             update_code(window.init_browser);
             break;
-        case "option2":
+        case "2":
             console.log("异步递归操作标签页");
             update_code(window.yibu_digui_biaoqianye);
             break;
-        case "option3":
+        case "3":
             console.log("多线程操作标签页");
             update_code(window.duoxianchengbiaoqianye);
             break;
-        case "option4":
+        case "4":
             console.log("模拟键盘操作");
             update_code(window.debug_browser);
             break;
-        case "option5":
-            console.log("小说下载");
-            break;
-        case "option10":
-            // 这里是 option10 的事件处理逻辑
+        
+        case "5":
+            
             console.log("Hook Cookie");
             update_code(hook_cookie_code);
             break;
-        case "option6":
-            console.log("代理设置");
+        case "6":
+            console.log("弹幕");
+            update_code(window.jianting_danmu)
             break;
-        case "option7":
-            console.log("操作插件");
-            break;
+
         default:
             console.log("未识别的选项");
             break;
     }
+});
+
+
+// 获取按钮和文本区域的DOM元素
+var copyButton = document.getElementById('copy_code');
+var textArea = document.getElementById('wenben');
+
+// 给按钮添加点击事件监听器
+copyButton.addEventListener('click', async () => {
+  // 使用Clipboard API复制文本
+  try {
+    await navigator.clipboard.writeText(textArea.value);
+    console.log('成功复制到剪贴板');
+    alert('成功复制到剪贴板');
+    // 这里可以添加更多的交互，比如显示一个提示信息
+  } catch (err) {
+    console.error('无法复制文本: ', err);
+    alert(err);
+  }
 });
