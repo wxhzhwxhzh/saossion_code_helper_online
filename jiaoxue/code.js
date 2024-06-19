@@ -66,6 +66,35 @@ time.sleep(20)
 
 # 关闭记事本
 autoit.win_close("[CLASS:Notepad]")
+`,
+get_plugin_list:`
+def get_plugin_list(self):
+    tab=self.page.new_tab('chrome://extensions/')
+    tab.ele('t:body').ele('t:extensions-manager').sr('#toolbar').sr('t:cr-toolbar').ele('t:div').ele('t:cr-toggle').click()
+
+    
+    plugin_list=[]
+    for plugin  in  tab.ele('t:extensions-manager').sr('#container').ele('t:cr-view-manager').ele('t:extensions-item-list').sr('t:div@@class=items-container').eles('t:extensions-item'):
+        ss=plugin.sr('#content').text.split('\\n')[0:4]
+        options=f'chrome-extension://{ss[3][3:]}/options.html'
+
+        ss.append(options)
+
+        plugin_list.append(ss)
+    return plugin_list  
+`,
+get_bookmarks_list:`
+
+def get_bookmarks_list(self):
+    tab=self.page.new_tab('chrome://bookmarks/')
+
+
+    bookmarks_list=[]
+    for shu_qian  in  tab.ele('t:bookmarks-app').sr('tag:bookmarks-list').sr('#list').eles('tag:bookmarks-item'):
+        ss=shu_qian.sr('#website-text').text
+    
+        bookmarks_list.append(ss)
+    return bookmarks_list   
 `
 
 }

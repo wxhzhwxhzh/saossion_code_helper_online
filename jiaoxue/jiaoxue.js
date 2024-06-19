@@ -337,6 +337,14 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("ntp");
             update_code(code_frame.ntp);
             break;
+        case "9":
+            console.log("插件信息");
+            update_code(code_frame.get_plugin_list);
+            break;
+        case "10":
+            console.log("书签信息");
+            update_code(code_frame.get_bookmarks_list);
+            break;
 
         default:
             console.log("未识别的选项");
