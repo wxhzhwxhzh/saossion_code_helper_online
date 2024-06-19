@@ -341,20 +341,27 @@ document.getElementById("ua").addEventListener("change", function() {
 });
 
 
-// 获取按钮和文本区域的DOM元素
+
+
+
+// 首先获取按钮和文本区域的DOM元素
 var copyButton = document.getElementById('copy_code');
 var textArea = document.getElementById('wenben');
 
 // 给按钮添加点击事件监听器
-copyButton.addEventListener('click', async () => {
-  // 使用Clipboard API复制文本
+copyButton.addEventListener('click', function() {
+  // 选中文本区域的内容
+  textArea.select();
+  
+  // 执行浏览器的复制命令
   try {
-    await navigator.clipboard.writeText(textArea.value);
-    console.log('成功复制到剪贴板');
-    alert('成功复制到剪贴板');
+    var successful = document.execCommand('copy');
+    var msg = successful ? '成功复制到剪贴板' : '复制失败';
+    console.log(msg);
+    alert(msg);
     // 这里可以添加更多的交互，比如显示一个提示信息
   } catch (err) {
-    console.error('无法复制文本: ', err);
+    console.log('无法复制文本: ', err);
     alert(err);
   }
 });
