@@ -226,5 +226,6 @@ appendLinkToUL('https://curlconverter.com/powershell-webrequest/', 'CURL convert
 appendLinkToUL('https://cuiqingcai.com/', '崔庆才 爬虫博客');
 appendLinkToUL('https://scrape.center/', '爬虫 练习场');
 appendLinkToUL('https://www.suyin-tools.cn/', '优雅的软件分享站点');
+appendLinkToUL('https://python3webspider.cuiqingcai.com/', 'Python3网络爬虫开发实战');
 
 
