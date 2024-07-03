@@ -223,5 +223,7 @@ function appendLinkToUL(href, textContent) {
 // 调用函数，传入相应的参数
 appendLinkToUL('https://linux.do/t/topic/9103', '最新gpt网址大全');
 appendLinkToUL('https://curlconverter.com/powershell-webrequest/', 'CURL converter');
+appendLinkToUL('https://cuiqingcai.com/', '崔庆才 爬虫博客');
+appendLinkToUL('https://scrape.center/', '爬虫 练习场');
 
 
