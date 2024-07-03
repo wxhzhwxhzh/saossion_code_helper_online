@@ -225,5 +225,6 @@ appendLinkToUL('https://linux.do/t/topic/9103', '最新gpt网址大全');
 appendLinkToUL('https://curlconverter.com/powershell-webrequest/', 'CURL converter');
 appendLinkToUL('https://cuiqingcai.com/', '崔庆才 爬虫博客');
 appendLinkToUL('https://scrape.center/', '爬虫 练习场');
+appendLinkToUL('https://www.suyin-tools.cn/', '优雅的软件分享站点');
 
 
