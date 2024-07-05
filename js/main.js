@@ -229,3 +229,13 @@ appendLinkToUL('https://www.suyin-tools.cn/', '优雅的软件分享站点');
 appendLinkToUL('https://python3webspider.cuiqingcai.com/', 'Python3网络爬虫开发实战');
 
 
+
+const link_obj = {  
+  'DP助手7.9':'https://github.com/wxhzhwxhzh/saossion_code_helper_online/releases/download/7.9/DP_helper_7.9.rar/'
+
+};
+
+for (let key in link_obj) {
+  console.log(key + ': ' + link_obj[key]);
+  appendLinkToUL(key,link_obj[key]);
+}
