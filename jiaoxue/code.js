@@ -95,6 +95,31 @@ def get_bookmarks_list(self):
     
         bookmarks_list.append(ss)
     return bookmarks_list   
-`
+`,
+get_json_by_fetch:`
+def get_json_by_js_fetch(tab,fetch_code:str):
+    if fetch_code.startswith('\\n'):
+        fetch_code=fetch_code[1:]
+    js_code='''
+    async function fetchData() {
+        try {
+            const response = await fetch_code
+            const data = await response.json();// 返回响应对象的json数据
+            console.log(data); 
+
+            return data; // 返回数据
+        } catch (error) {
+            console.error('获取数据时出错:', error);    
+            throw error; // 如果有必要，重新抛出错误
+        }
+    }
+
+    // 调用函数
+    return  fetchData();
+
+    '''.replace('fetch_code',fetch_code)
+
+    json_data=tab.run_js(js_code)
+    print(json_data)`
 
 }

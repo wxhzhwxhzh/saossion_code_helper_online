@@ -345,6 +345,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("书签信息");
             update_code(code_frame.get_bookmarks_list);
             break;
+        case "11":
+            console.log("通过js的fetch获取json数据");
+            update_code(code_frame.get_json_by_fetch);
+            break;
 
         default:
             console.log("未识别的选项");
