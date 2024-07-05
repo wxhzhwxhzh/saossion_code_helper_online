@@ -26,7 +26,7 @@ window.init_browser=`
 # -*- coding:utf-8 -*-
 #title
 
-# DrissionPage 库 文档地址 http://g1879.gitee.io/drissionpagedocs/
+# DrissionPage 库 文档地址  https://drissionpage.cn/
 
 #-导入库
 from DrissionPage import ChromiumPage,ChromiumOptions
@@ -41,22 +41,16 @@ class Config:
 #-创建配置对象
 co=ChromiumOptions()
 
-#-启动配置
-#端口
-#代理地址
-#UA
-#静音
-
 #-创建浏览器
 page = ChromiumPage(addr_or_opts=co)
 
 #-设置文件下载目录 默认是当前目录
 page.set.download_path(".")
 
-#cookie
-#-打开网址
 
-#启动网址
+#-打开网址
+tab=page.new_tab('https://drissionpage.cn/')
+
 
 test=input('继续 ?')
   
