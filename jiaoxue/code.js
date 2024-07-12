@@ -120,6 +120,33 @@ def get_json_by_js_fetch(tab,fetch_code:str):
     '''.replace('fetch_code',fetch_code)
 
     json_data=tab.run_js(js_code)
-    print(json_data)`
+    print(json_data)`,
+    sr_iframe_tao_wa:`    
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+# DrissionPage 库 文档地址  https://drissionpage.cn/
+
+#-导入库
+from DrissionPage import ChromiumPage,ChromiumOptions
+
+#-创建配置对象
+co=ChromiumOptions()
+
+#-创建浏览器
+page = ChromiumPage(addr_or_opts=co)
+
+#-设置文件下载目录 默认是当前目录
+page.set.download_path(".")
+#-打开网址
+
+
+tab=page.new_tab('https://eservice.rclgroup.com/CargoTracking/')
+aat=tab('t:div@@class=cf-turnstile-wrapper').sr('t:iframe')('t:body').sr('#success-text')
+print(aat)
+
+
+test=input('继续 ?')
+  `
 
 }

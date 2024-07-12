@@ -343,6 +343,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("通过js的fetch获取json数据");
             update_code(code_frame.get_json_by_fetch);
             break;
+        case "12":
+            console.log("定位 sr和iframe套娃的元素");
+            update_code(code_frame.sr_iframe_tao_wa);
+            break;
 
         default:
             console.log("未识别的选项");
