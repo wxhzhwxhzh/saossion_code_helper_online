@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码复制</title>
+
+<style>
+    .code-container {
+        position: relative;
+        margin: 20%;
+        background-color: #f6f8fa;
+        border-radius: 5px;
+        font-family: 黑体;
+    }
+
+    .copy-button {
+        position: absolute;
+        top: 10px;
+        /* 调整按钮位置 */
+        right: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    #code {
+        font-family: consolas;
+        font-size: smaller;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="custom-border">
+    这是一个带有伪元素边框的内容。
+</div>
+
+<div class="code-container">
+    <pre>
+        <code id="code">
+            // Your code here
+            function appendLinkToUL(href, textContent) {
+                // 创建一个新的 li 元素
+                var newLi = document.createElement('li');
+              
+                // 创建一个新的 a 元素
+                var newA = document.createElement('a');
+                newA.href = href;
+                newA.target = '_blank'; // 在新窗口打开链接
+                newA.textContent = textContent;
+              
+                // 将 a 元素添加为 li 元素的子元素
+                newLi.appendChild(newA);
+              
+                // 获取 ul 元素
+                var ul = document.getElementById('sao_ul');
+              
+                // 确保 ul 元素存在，然后将新的 li 元素追加到 ul 元素的末尾
+                if (ul) {
+                    ul.appendChild(newLi);
+                } else {
+                    console.error('未找到 id 为 sao_ul 的 ul 元素');
+                }
+              }
+        </code>
+    </pre>
+    <button class="copy-button">复制</button>
+</div>
+
+
+<script>
+    document.querySelector('.copy-button').addEventListener('click', function() {
+    var codeElement = document.querySelector('.code-container code');
+    var codeText = codeElement.textContent;
+    
+    var tempInput = document.createElement('textarea');
+    tempInput.value = codeText;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    this.innerHTML = '复制成功';
+    setTimeout(() => { this.innerHTML = '复制'; }, 1000); // 使用箭头函数
+    
+    // alert('Code copied to clipboard');
+});
+
+</script>
+</body>
+</html>

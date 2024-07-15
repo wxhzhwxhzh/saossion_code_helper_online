@@ -35,3 +35,16 @@ tab=page.new_tab('https://drissionpage.cn/')
 #启动网址
 
 test=input('继续 ?')
+
+def bypass_cf(tab: ChromiumTab):
+    # 查找页面上是否存在类名为 'cf-turnstile-wrapper' 的元素，并设置超时时间为 10 秒
+    if i := tab('.cf-turnstile-wrapper', timeout=10):    
+        # 等待 3 秒
+        tab.wait(3)
+        # 在找到的元素中查找 iframe 标签，并在该 iframe 中查找 body 标签，然后查找类型为 checkbox 的元素
+        e = i.sr('t:iframe')('t:body').sr('@type=checkbox')
+        # 点击找到的 checkbox 元素
+        e.click()
+    else:
+        print('没检测到Cloudflare 页面,跳过...')
+        pass    
