@@ -347,6 +347,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("定位 sr和iframe套娃的元素");
             update_code(code_frame.sr_iframe_tao_wa);
             break;
+        case "13":
+            console.log("通过队列实现多线程资源池");
+            update_code(code_frame.resource_pool);
+            break;
 
         default:
             console.log("未识别的选项");

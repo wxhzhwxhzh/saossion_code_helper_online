@@ -147,6 +147,51 @@ print(aat)
 
 
 test=input('继续 ?')
-  `
+  `,
+  resource_pool:`
+import queue
+import threading
+import time
+from queue import  Queue
+
+
+# 消费者线程函数
+def consumer(q:Queue,name):
+    while True:
+        item = q.get()
+        a,b=item
+        item_2=[a,b+1]            
+        if item is None:
+            break
+        print(f"{name}消费 {item}...")
+        time.sleep(0.5)
+        if item_2[1]<15 :
+            if not q.full():
+                q.put(item_2)
+        else:
+            if q.empty():
+                break        
+      
+
+# 创建一个队列对象
+q = queue.Queue(maxsize=7)
+obj =[['body',0]  for i in  range(5)]
+#把队列填满
+[q.put(k) for k in obj]
+print('资源池已经预装好资源.')
+
+
+
+# 创建消费者线程
+
+threading.Thread(target=consumer, args=(q,'amy ')).start()
+threading.Thread(target=consumer, args=(q,'bob ')).start()
+
+# 等待队列处理完毕
+# q.put(None)
+
+
+print("All tasks are done.")
+`
 
 }
