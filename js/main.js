@@ -221,12 +221,13 @@ function appendLinkToUL(href, textContent) {
 }
 
 // 调用函数，传入相应的参数
-appendLinkToUL('https://linux.do/t/topic/9103', '最新gpt网址大全');
+appendLinkToUL('https://linux.do/t/topic/9103', '最新gpt网址大全22');
 appendLinkToUL('https://curlconverter.com/powershell-webrequest/', 'CURL converter');
 appendLinkToUL('https://cuiqingcai.com/', '崔庆才 爬虫博客');
 appendLinkToUL('https://scrape.center/', '爬虫 练习场');
 appendLinkToUL('https://www.suyin-tools.cn/', '优雅的软件分享站点');
 appendLinkToUL('https://python3webspider.cuiqingcai.com/', 'Python3网络爬虫开发实战');
+appendLinkToUL('https://blog.haoji.me/chrome-plugin-develop.html', 'Chrome 插件开发指南');
 
 
 
