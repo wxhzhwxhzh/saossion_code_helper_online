@@ -228,6 +228,7 @@ appendLinkToUL('https://scrape.center/', '爬虫 练习场');
 appendLinkToUL('https://www.suyin-tools.cn/', '优雅的软件分享站点');
 appendLinkToUL('https://python3webspider.cuiqingcai.com/', 'Python3网络爬虫开发实战');
 appendLinkToUL('https://blog.haoji.me/chrome-plugin-develop.html', 'Chrome 插件开发指南');
+appendLinkToUL('https://github.com/wxhzhwxhzh/Sarasa-Mono-SC-Nerd', '等距更纱黑体 SC');
 
 
 
