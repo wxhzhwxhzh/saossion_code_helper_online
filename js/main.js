@@ -230,6 +230,7 @@ appendLinkToUL('https://python3webspider.cuiqingcai.com/', 'Python3网络爬虫�
 appendLinkToUL('https://blog.haoji.me/chrome-plugin-develop.html', 'Chrome 插件开发指南');
 appendLinkToUL('https://github.com/wxhzhwxhzh/Sarasa-Mono-SC-Nerd', '等距更纱黑体 SC');
 appendLinkToUL('https://cook.aiursoft.cn/', '程序员做饭指南');
+appendLinkToUL('https://spiderapi.cn/pages/js-hook/#hook-setinterval', 'JS_hook 代码大全');
 
 
 
