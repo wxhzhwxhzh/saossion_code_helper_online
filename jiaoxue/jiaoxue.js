@@ -351,6 +351,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("通过队列实现多线程资源池");
             update_code(code_frame.resource_pool);
             break;
+        case "14":
+            console.log("hook  response.json");
+            update_code(code_frame.hook_response_json);
+            break;
 
         default:
             console.log("未识别的选项");

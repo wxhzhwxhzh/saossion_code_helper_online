@@ -192,6 +192,55 @@ threading.Thread(target=consumer, args=(q,'bob ')).start()
 
 
 print("All tasks are done.")
+`,
+hook_response_json:`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+#骚神
+
+
+
+#-导入库
+from pprint import pprint
+from DrissionPage import ChromiumPage,ChromiumOptions
+
+#-创建配置对象
+co=ChromiumOptions().set_browser_path(r'Z:\Twinkstar_v8.4.2000.2209_ReleaseA64_portable\twinkstar.exe')
+
+#-启动配置
+
+js_code=r'''
+// 保存原始的 Response 原型上的 json 方法
+const originalResponseJson = Response.prototype.json;
+
+// 改写 Response 原型上的 json 方法
+Response.prototype.json = async function() {
+    // 调用原始的 json 方法获取原始数据
+    const originalJson = await originalResponseJson.apply(this);
+
+    // 在控制台打印返回的 JSON 数据
+    console.log('Response JSON:', JSON.stringify(originalJson));
+
+    // 返回原始的 Json 数据
+    return originalJson;
+};
+'''
+
+
+
+#-创建浏览器
+page = ChromiumPage(addr_or_opts=co)
+
+
+#-打开网址
+page.add_init_js(js_code)
+page.console.start()
+page.get("https://www.qq.com")
+
+for i in page.console.steps():
+    print(i.text)
+
+test=input('继续 ?')
 `
 
 }
