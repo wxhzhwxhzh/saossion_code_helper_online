@@ -355,6 +355,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("hook  response.json");
             update_code(code_frame.hook_response_json);
             break;
+        case "15":
+            console.log("python with sql");
+            update_code(code_frame.python_with_sql);
+            break;
 
         default:
             console.log("未识别的选项");

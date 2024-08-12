@@ -242,5 +242,39 @@ for i in page.console.steps():
 
 test=input('继续 ?')
 `
+,
+python_with_sql:`
+import sqlite3
 
+# 连接到数据库
+conn = sqlite3.connect('example.db')
+cursor = conn.cursor()
+
+# 创建一个表
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        age INTEGER
+    )
+''')
+
+# 插入一些数据
+cursor.execute("INSERT INTO users (name, age) VALUES ('Alice', 30)")
+cursor.execute("INSERT INTO users (name, age) VALUES ('Bob', 25)")
+conn.commit()
+
+# 查询数据
+cursor.execute("SELECT * FROM users")
+rows = cursor.fetchall()  # 获取所有结果
+
+# 处理结果
+for row in rows:
+    print(row)
+
+# 关闭游标和连接
+cursor.close()
+conn.close()
+
+`
 }
