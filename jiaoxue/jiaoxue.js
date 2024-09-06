@@ -359,6 +359,10 @@ document.getElementById("ua").addEventListener("change", function() {
             console.log("python with sql");
             update_code(code_frame.python_with_sql);
             break;
+        case "16":
+            console.log("python with sql");
+            update_code(code_frame.listen_console);
+            break;
 
         default:
             console.log("未识别的选项");

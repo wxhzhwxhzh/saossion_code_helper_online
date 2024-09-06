@@ -276,5 +276,27 @@ for row in rows:
 cursor.close()
 conn.close()
 
+`,
+listen_console:`
+
+from DrissionPage import ChromiumPage,ChromiumOptions
+import random
+
+
+
+#-创建配置对象
+co=ChromiumOptions()
+
+#-创建浏览器
+page = ChromiumPage(addr_or_opts=co)
+page.get("https://www.baidu.com")
+
+page.wait(4)
+
+# page.run_js(' return JSON.stringify(window) ')
+t=page.latest_tab
+t.console.start()
+for i in  t.console.steps():
+    print(i)
 `
 }
