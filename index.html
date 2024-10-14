@@ -45,19 +45,15 @@
 
 
         <!-- 标签组栏   -->
-        <ul id="myTab" class="nav nav-tabs"    >
-            <li class="active">
-                <a href="#home" data-toggle="tab">
-                    代码生成助手
-                </a>
-            </li>
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active" > <a href="#home" data-toggle="tab"> 代码生成助手 </a> </li>
             <li><a href="#yufazhuanhuan" data-toggle="tab" class="heise">知名网站</a></li>
             <li><a href="#listen_data" data-toggle="tab" class="heise">浏览器插件工具</a></li>
             <li><a href="#v_help" data-toggle="tab" class="heise">视频教学</a></li>
-            <li><a href="#download" data-toggle="tab" class="heise" >下载中心</a></li>
-            <li><a href="#help" data-toggle="tab" class="heise">使用帮助</a></li>
-            <li><a href="#coffee" data-toggle="tab"  class="heise" >打赏和捐赠</a></li>
-
+            <li><a href="#download" data-toggle="tab" class="heise">下载中心</a></li>
+            <li><a   href="#help" data-toggle="tab" class="heise">使用帮助</a></li>
+            <li > <a  id="donate" href="#coffee" data-toggle="tab" class="heise">打赏和捐赠</a></li>
+        
         </ul>
 
         <!-- 标签第一组 -->
@@ -306,8 +302,8 @@
                 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-请我喝咖啡">🍺 请骚神库作者喝一杯 [微信]</h2>
                 <p><img loading="lazy" src="./img/打赏码.png"  class="img_ev3q"></p>
 
-                <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-请我喝咖啡">☕ 请DP库作者喝咖啡</h2>
-                <p><img loading="lazy" src="https://drissionpage.cn/assets/images/code-764dd10f15f131f48c0319d0eaf8f4fd.jpg" width="708" height="391" class="img_ev3q"></p>
+                <h2 class="anchor anchorWithStickyNavbar_LWe7" id="-请我喝咖啡">☕ 用支付宝，打赏骚神作者</h2>
+                <p><img loading="lazy" src="./img/支付宝打赏.jpeg" width="708" class="img_ev3q"></p>
             </div>
 
             <div class="tab-pane fade" id="jmeter">
@@ -335,7 +331,9 @@
 
 
     </div>
-
+    <script>
+        document.getElementById('donate').click();
+    </script>
     <script src="js/main.js"></script>
 </body>
 
