@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 设置高度为视口高度 */
+}
+
+.container {
+    display: flex;
+    height: 100%; /* 让容器占满视口高度 */
+}
+
+.sidebar {
+    width: 15%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+.content {
+    width: 85%;
+    padding: 20px;
+    overflow-y: auto; /* 添加垂直滚动条 */
+}
+
+h2 {
+    margin-top: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 10px 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+
+pre {
+    background-color: #f0f0f0; /* 背景色 */
+    border: 1px solid #ccc; /* 边框 */
+    padding: 10px; /* 内边距 */
+    overflow: auto; /* 如果代码很长，添加滚动条 */
+    border-radius: 5px; /* 圆角边框 */
+}
+
+code {
+    font-family: 'consolas','Courier New', Courier, monospace; /* 使用等宽字体 */
+    font-size: 14px;
+    
+}
+
+
+.code-container {
+    position: relative; /* 使按钮定位相对于代码块 */
+}
+
+pre {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 5px;
+}
+
+.copy-btn {
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 距离顶部 */
+    right: 10px; /* 距离右侧 */
+    padding: 5px 10px;
+    background-color: #007bff; /* 按钮背景色 */
+    color: white; /* 按钮文字颜色 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* 鼠标指针变化 */
+}
+
+.copy-btn:hover {
+    background-color: #0056b3; /* 悬停时颜色 */
+}

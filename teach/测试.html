@@ -1,0 +1,26 @@
+<section id="section1">
+    <h2>👻 第一课 控制浏览器</h2>
+    <div class="code-container">
+        <pre>
+            <code id="codeBlock">
+                #!/usr/bin/env python
+                # -*- coding:utf-8 -*-# 
+
+                
+                from DrissionPage import Chromium
+                
+                # 连接浏览器并获取浏览器对象
+                browser = Chromium()  
+                
+                # 获取标签页对象并打开网址
+                tab = browser.new_tab('https://www.baidu.com')
+                
+                
+                
+                input('Press any key to quit') 
+                
+            </code>
+        </pre>
+        <!-- <button class="copy-btn" onclick="copyCode()">复制代码</button> -->
+    </div>
+</section>
