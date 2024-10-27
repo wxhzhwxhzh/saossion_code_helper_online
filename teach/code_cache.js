@@ -1,5 +1,219 @@
 window.code0=`
 `;
+window.code16=`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-# 
+
+# 骚神DP教学
+# 电脑内需要提取安装谷歌浏览器或者其他chromium内核的浏览器  比如 edge浏览器  qq浏览器  360浏览器
+# Drissionpage官网  http://drissionpage.cn/
+# Drissionpage 版本需要大于等于 4.1.0.0
+
+
+from DrissionPage import Chromium,ChromiumOptions
+from  loguru import logger
+
+options=ChromiumOptions()
+
+# 连接浏览器并获取浏览器对象
+browser = Chromium(options)  
+
+# 获取标签页对象并打开网址
+tab = browser.new_tab('https://spa1.scrape.center/')
+
+
+tab.console.start()
+
+# 一条日志信息
+# logger.info(tab.console.wait().text)
+
+js_code='''
+console.log(window.location.href);
+'''
+
+tab.run_js(js_code)
+
+logger.info(tab.console.wait().text)
+
+
+# 所有日志信息
+for data  in  tab.console.messages:
+    logger.info(data.text)
+
+
+fetch_code=r'''fetch("https://spa1.scrape.center/api/movie/?limit=10&offset=0", {
+  "referrer": "https://spa1.scrape.center/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "omit"
+});
+'''
+
+#立即调用的箭头函数形式
+response_code='''
+(async ()=>{
+    var res = await fetch_code
+
+    let data = await res.text();
+    console.log(data);
+})()
+'''.replace('fetch_code',fetch_code)
+
+tab.run_js(response_code)
+
+tab.wait(3)
+logger.info(tab.console.wait().text)
+
+
+
+
+input('请按回车键继续')
+
+`;
+window.code15=`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-# 
+
+# 骚神DP教学
+# 电脑内需要提取安装谷歌浏览器或者其他chromium内核的浏览器  比如 edge浏览器  qq浏览器  360浏览器
+# Drissionpage官网  http://drissionpage.cn/
+# Drissionpage 版本需要大于等于 4.1.0.0
+ 
+
+from DrissionPage import Chromium, ChromiumOptions
+import threading
+import concurrent.futures
+import time
+import queue
+from loguru import logger
+
+# 创建一个队列用于存储标签页对象
+标签页队列= queue.Queue()
+
+# 启动浏览器并获取标签页对象
+co = ChromiumOptions()
+browser = Chromium(co)
+
+tab_instance = browser.new_tab('https://www.bigee.cc/book/20233/')
+
+# 获取所有章节链接
+
+
+链接列表=[i.link   for i in  tab_instance('t:div@@class=listmain').eles('t:a')   if 'book' in i.link]
+# 链接列表=链接列表[:15]
+print(链接列表)
+
+
+def 打开网页(url):
+    if url is None:
+        return
+    t = browser.new_tab(url)
+    标签页队列.put(t)    
+    logger.info(f'{t.title} 该网页已经打开')
+    time.sleep(2)
+
+def 采集网页数据():
+    while True:
+        t = 标签页队列.get()
+        if t is None: # 如果获取的消息为None，则退出循环
+            break
+        logger.error(t.ele('#chaptercontent').text[:15])        
+        threading.Thread(target=t.close).start()
+        
+        logger.warning(f'{t.title} 已经完成抓取...')
+    print('数据采集完成')    
+
+
+
+
+采集线程数=6
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor1,   concurrent.futures.ThreadPoolExecutor(max_workers=采集线程数) as executor2:
+    
+    # 提交任务到网页打开线程池
+    pool1 =  [executor1.submit(打开网页, chapter_url)   for  chapter_url in  链接列表]  
+
+    time.sleep(1)
+
+    # 提交任务到第网页数据采集线程池
+    pool2 =  [executor2.submit(采集网页数据)   for  i in  range(采集线程数)]
+
+    # 等待线程池1所有任务完成
+    concurrent.futures.wait(pool1)
+
+    # 批量添加结束标记，通知线程池2关闭
+    [标签页队列.put(None)   for _ in range(采集线程数)]
+
+  
+
+
+    
+
+input('按任意键退出.......') 
+`;
+window.code14=`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-# 
+
+# 骚神DP教学
+# 电脑内需要提取安装谷歌浏览器或者其他chromium内核的浏览器  比如 edge浏览器  qq浏览器  360浏览器
+# Drissionpage官网  http://drissionpage.cn/
+# Drissionpage 版本需要大于等于 4.1.0.0
+
+
+import time
+from DrissionPage import Chromium
+from loguru import logger
+
+# 设置日志记录到文件
+logger.add("JD_comment.log", format="{time} {message}")
+
+# 初始化浏览器
+browser = Chromium()
+
+# 打开京东首页
+main_tab = browser.new_tab('https://www.jd.com/')
+
+# 获取搜索框并输入关键词
+search_input = main_tab.ele('tag:input@@id=key')
+search_input.input('小米手机')
+
+# 点击搜索按钮
+main_tab('tag:button@@aria-label=搜索').click()
+
+# 获取搜索结果列表
+search_results = main_tab.eles('t:li@@class=gl-item')
+
+# 打印每个搜索结果的文本
+# for result in search_results:
+#     logger.info(result)
+
+# 点击搜索结果中的第二个商品以打开商品详情页
+product_detail_tab = search_results[1].ele('t:a').click.for_new_tab()
+# 点击评论标签页
+product_detail_tab.ele('@data-anchor=#comment').click()
+
+# 获取并打印商品评论
+def get_comments(tab):
+    for comment in tab.eles('t:div@@class=comment-item'):
+        # logger.info(comment)
+        
+        logger.info(comment('.comment-con').text)  # 记录评论内容
+        if recomment:=comment.ele('.recomment',timeout=2):
+            logger.error(recomment.text)
+        
+        time.sleep(2)
+
+# 获取第一页评论并点击下一页
+get_comments(product_detail_tab)
+product_detail_tab.ele('t:a@@rel=2').click()
+
+# 循环获取剩余页码的评论
+for _ in range(4):
+    get_comments(product_detail_tab)
+    product_detail_tab.ele('下一页').click()`;
 window.code13=`
 
 #!/usr/bin/env python
@@ -62,7 +276,7 @@ async def main():
 # 运行主函数
 if __name__ == '__main__':
     asyncio.run(main())`;
-    
+
 window.code12=`
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-# 
