@@ -75,3 +75,4 @@ addNewSection('第13课 异步操作浏览器标签页', window.code13,'section1
 addNewSection('第14课 批量抓取某东商品评论', window.code14,'section14');
 addNewSection('第15课 线程池+消息队列 采集网页数据', window.code15,'section15');
 addNewSection('第16课 DP监听浏览器console数据和异步函数返回值抓包', window.code16,'section16');
+addNewSection('第20课 某音直播间弹幕抓取和采集', window.code20,'section20');
