@@ -76,3 +76,33 @@ addNewSection('第14课 批量抓取某东商品评论', window.code14,'section1
 addNewSection('第15课 线程池+消息队列 采集网页数据', window.code15,'section15');
 addNewSection('第16课 DP监听浏览器console数据和异步函数返回值抓包', window.code16,'section16');
 addNewSection('第20课 某音直播间弹幕抓取和采集', window.code20,'section20');
+
+
+
+
+
+
+
+
+
+// 平滑滚动
+// 选择页面中所有的链接
+document.querySelectorAll('a').forEach(anchor => {
+    // 为每个链接添加点击事件监听器
+    anchor.addEventListener('click', function (e) {
+        // 阻止默认的点击行为，即阻止链接跳转
+        e.preventDefault();
+
+        // 获取被点击链接的href属性值，即目标元素的id
+        const targetId = this.getAttribute('href');
+        // 根据目标元素的id选择目标元素
+        const targetElement = document.querySelector(targetId);
+
+        // 使目标元素平滑地滚动到浏览器窗口的可见区域
+        targetElement.scrollIntoView({
+            behavior: 'smooth',
+           
+            
+        });
+    });
+});

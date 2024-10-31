@@ -7,6 +7,9 @@ body {
     /* 垂直排列 */
     flex-direction: column;
 
+    font-family: 'CMUTypewriterTextRegular';
+    font-weight: normal;
+    font-style: normal;
   }
 
 /* 模糊的背景图 */
