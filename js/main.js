@@ -243,3 +243,54 @@ for (let key in link_obj) {
   console.log(key + ': ' + link_obj[key]);
   appendLinkToUL(link_obj[key],key);
 }
+
+// 动态网站背景切换代码
+
+
+
+let img_urls = [];  // 定义全局变量 img_urls
+
+// 定义一个函数来随机选择一个图片 URL
+function getRandomImageUrl() {
+  if (img_urls.length === 0) {
+    console.error('img_urls 尚未加载');
+    return '';
+  }
+  return img_urls[Math.floor(Math.random() * img_urls.length)];
+}
+
+// 定义一个函数来设置背景图片
+function setBackgroundImage() {
+  // 使用过渡效果
+  document.body.style.transition = "background-image 1s ease-in-out";  // 1秒的过渡时间，过渡方式为ease-in-out
+  document.body.style.backgroundImage = "url('" + getRandomImageUrl() + "')";
+}
+
+
+async function fetchDataAndSetBackground() {
+  try {
+    const response = await fetch('./js/img_url_list.json');
+    if (!response.ok) {
+      throw new Error('网络响应不是ok');
+    }
+    const jsonData = await response.json(); // 解析 JSON
+    console.log(jsonData); // 使用读取到的 JSON 数据
+
+    img_urls = [...jsonData.images,...jsonData.mac,...jsonData.animals]; // 使用展开运算符...将两个数组合并为一个数组
+    
+    // 初始化时设置一次背景图片
+    setBackgroundImage();
+
+    // 每隔 5 秒更换一次背景图片
+    setInterval(setBackgroundImage, 8000);
+  } catch (error) {
+    console.error('读取文件时出错:', error);
+  }
+}
+
+fetchDataAndSetBackground();
+
+
+
+
+
