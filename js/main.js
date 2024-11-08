@@ -276,7 +276,7 @@ async function fetchDataAndSetBackground() {
     const jsonData = await response.json(); // 解析 JSON
     console.log(jsonData); // 使用读取到的 JSON 数据
 
-    img_urls = [...jsonData.images,...jsonData.mac,...jsonData.animals]; // 使用展开运算符...将两个数组合并为一个数组
+    img_urls = [...jsonData.cute,...jsonData.images,...jsonData.mac,...jsonData.animals]; // 使用展开运算符...将两个数组合并为一个数组
     
     // 初始化时设置一次背景图片
     setBackgroundImage();
