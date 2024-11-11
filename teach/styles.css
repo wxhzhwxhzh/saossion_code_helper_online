@@ -1,6 +1,16 @@
 * {
     box-sizing: border-box;
 }
+
+@font-face {
+    font-family: 'GT Standard Mono VF Beta V1';
+    src: url('GT-Standard-Mono-VF-Beta-V1.ttf') format('ttf');
+  
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
 html {
     scroll-behavior: smooth;
 }
@@ -63,7 +73,7 @@ pre {
 }
 
 code {
-    font-family: 'consolas','Courier New', Courier, monospace; /* 使用等宽字体 */
+    font-family: 'GT Standard Mono VF Beta V1','consolas','Courier New', Courier, monospace; /* 使用等宽字体 */
     font-size: 14px;
     
 }
