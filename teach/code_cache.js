@@ -818,3 +818,33 @@ search_button=tab.ele('tag:input@@type=submit@@id=su@@value=百度一下')  #最
 search_button.click()
 
 `;
+window.code23=`
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-# 
+
+from DrissionPage import Chromium
+
+browser = Chromium(8976)
+
+#自动点击确认按钮
+tab=browser.new_tab()
+tab.get('https://zh.javascript.info/alert-prompt-confirm')
+tab.wait(5)
+
+# 禁用alert和confirm的弹窗
+
+js_code='''
+window.alert = ()=> {console.log("alert 被禁用");}
+window.confirm = ()=> {console.log("confirm 被禁用");}
+'''
+tab.run_js(js_code)
+tab.wait(2)
+
+print('开始点击弹窗；')
+tab.eles('t:a@@title=运行')[-2].click()
+tab.wait(3)
+print('已经点击..')
+
+
+input('输入任意键退出..')
+`;
