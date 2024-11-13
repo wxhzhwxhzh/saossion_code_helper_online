@@ -1,0 +1,66 @@
+<!-- ws://124.222.224.186:8800 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>WebSocket 例子</h1>
+
+    <!-- 消息输入框 -->
+    <label for="messageInput">Enter your message: </label>
+    <input type="text" id="messageInput" placeholder="Type a message">
+    
+    <!-- 发送消息按钮 -->
+    <button id="sendMessage" disabled>Send Message</button>
+
+    <!-- 显示接收到的消息 -->
+    <div id="messages"></div>
+  </div>
+
+  <script>
+    const socket = new WebSocket('ws://124.222.224.186:8800');
+
+    socket.onopen = function(event) {
+      console.log('WebSocket connection established.');
+      document.getElementById('sendMessage').disabled = false;  // 启用发送按钮
+    };
+
+    socket.onmessage = function(event) {
+      const messagesDiv = document.getElementById('messages');
+      const newMessage = document.createElement('div');
+      newMessage.textContent = `Received: ${event.data}`;
+      messagesDiv.appendChild(newMessage);
+    };
+
+    document.getElementById('sendMessage').addEventListener('click', function() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+
+      if (message) {
+        console.log(`Sending message: ${message}`);
+        socket.send(message);
+        messageInput.value = '';
+      } else {
+        alert("Please enter a message to send.");
+      }
+    });
+
+    socket.onclose = function(event) {
+      console.log('WebSocket connection closed.');
+    };
+
+    socket.onerror = function(error) {
+      console.error('WebSocket Error:', error);
+    };
+  </script>
+
+</body>
+</html>
+
+
