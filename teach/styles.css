@@ -20,6 +20,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh; /* 设置高度为视口高度 */
+   
 }
 
 .container {
@@ -75,6 +76,7 @@ pre {
 code {
     font-family: 'GT Standard Mono VF Beta V1','consolas','Courier New', Courier, monospace; /* 使用等宽字体 */
     font-size: 14px;
+    font-size: small;
     
 }
 
