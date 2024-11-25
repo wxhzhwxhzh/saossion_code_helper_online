@@ -8,14 +8,24 @@ function copyCode(cc) {
 
 }
 
+function createMaterialIcon(iconName, fontSize = '14px') {
+    const spanElement = document.createElement('span');
+    spanElement.className = 'material-symbols-outlined';
+    spanElement.textContent = iconName;
+    spanElement.style.fontSize = fontSize;  // 设置字体大小
+    return spanElement;
+}
+
 function addNewSection(h2_title, code_str, section_id) {
     // 目录创建
     let mulu=document.querySelector('#mulu');
     let a=document.createElement('a');
     a.href='#'+section_id;
+    
     a.textContent=h2_title;
 
     let mulu_li=document.createElement('li');
+    mulu_li.appendChild(createMaterialIcon('chevron_right',fontSize='18px'));
     mulu_li.appendChild(a);
     mulu.appendChild(mulu_li);
 
@@ -44,7 +54,8 @@ function addNewSection(h2_title, code_str, section_id) {
 
     const copyButton = document.createElement('button');
     copyButton.classList.add('copy-btn');
-    copyButton.textContent = '复制代码';
+    copyButton.textContent = '复制代码'; 
+
     copyButton.addEventListener('click', ()=>{copyCode(code);
         copyButton.textContent = '已复制';
 
