@@ -1,5 +1,53 @@
 window.code0=`
 `;
+window.code28=`
+  
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+
+
+from typing import Any, Coroutine, List
+from DrissionPage import Chromium
+import asyncio
+
+# 创建页面对象
+browser = Chromium()
+
+async def search(word):
+    tab = browser.new_tab()  # 这里是同步调用
+    tab.get("https://www.baidu.com/")  # 打开百度     
+    await asyncio.sleep(2) #异步等待
+    tab.ele("@@id=kw").input(word)  # 输入搜索词
+    tab.ele("@@value=百度一下").click()  # 点击搜索按钮
+    await asyncio.sleep(2) #异步等待
+
+
+
+async def main():
+    name_list: List[str] = ['衣服', '蛋糕', '水果']
+    
+    # 商品加购物车
+    tasks: List[Coroutine] = []
+    for name in name_list:
+        tasks.append(search(name))
+
+    
+    # 结算下单 并 等待到货
+    await asyncio.gather(*tasks)
+
+
+# 运行异步任务
+if __name__ == "__main__":
+    asyncio.run(main())
+
+    input('继续 ?') 
+
+# 购买三样不同的物品
+
+# 同步：一个人去实体店购买三样物品
+# 多线程：三个人去实体店购买三样物品
+# 异步：一个人去网上下单三样物品（async ：加购物车    调用异步函数：下单    await：快递到货）
+`;
 window.code20=`
 
 #!/usr/bin/env python

@@ -88,6 +88,7 @@ addNewSection('第15课 线程池+消息队列 采集网页数据', window.code1
 addNewSection('第16课 DP监听浏览器console数据和异步函数返回值抓包', window.code16,'section16');
 addNewSection('第20课 某音直播间弹幕抓取和采集', window.code20,'section20');
 addNewSection('第23课 JS逆向之自动化Hook', window.code23,'section23');
+addNewSection('第28课 同步异步多线程', window.code28,'section28');
 
 
 
