@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Hook 技术指南</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --code-bg: #f8f9fa;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: var(--primary-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--secondary-color);
+            margin: 1.5em 0 0.8em;
+            scroll-margin-top: 20px;
+        }
+
+        h1 { border-bottom: 2px solid var(--border-color); }
+
+        pre {
+            position: relative;
+            background: var(--code-bg);
+            padding: 1.5em;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            margin: 1em 0;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            padding: 5px 12px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+        }
+
+        /* 侧边栏样式 */
+        #toc-sidebar {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            width: 260px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        #toc-sidebar h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .toc-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc-list a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+            transition: all 0.2s;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1024px) {
+            #toc-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 保持原有内容结构不变 -->
+    <h1>JS Hook</h1>
+    <h2>什么是Hook？</h2>
+    <p>Hook中文译为钩子，在程序中可理解为“劫持”。通过Hook技术能劫持对象，替换代码片段、修改参数或返回值，控制其与其他对象的交互。</p>
+    
+    <h2>Hook相关操作</h2>
+    <h3>Hook Cookie</h3>
+    <p>方法一：</p>
+    <pre><code>(function () {
+    let cookieCache = "";
+    Object.defineProperty(document, "cookie", {
+        set: function (val) {
+            console.log("Hook set cookie => ", val);
+            if (val.indexOf("baidu.com")!== -1) {
+                debugger;
+            }
+            cookieCache = val;
+            return val;
+        },
+        get: function () {
+            return cookieCache;
+        }
+    });
+})();</code></pre>
+    <p>方法二（不推荐）：</p>
+    <pre><code>(function () {
+    let cookieCache = document.cookie.__lookupSetter__("cookie");
+    document.__defineSetter__("cookie", function (val) {
+        console.log("Hook set cookie => ", val);
+        if (val.indexOf("baidu.com")!== -1) {
+            debugger;
+        }
+        cookieCache = val;
+    });
+    document.__defineGetter__("cookie", function () {
+        return cookieCache;
+    });
+})();</code></pre>
+    <h3>Hook Request Header</h3>
+    <pre><code>(function () {
+    let headerCache = window.XMLHttpRequest.prototype.setRequestHeader;
+    window.XMLHttpRequest.prototype.setRequestHeader = function (key, value) {
+        console.log("Hook set header %s => %s", key, value);
+        if (key === "baidu.com") {
+            debugger;
+        }
+        return headerCache.apply(this, arguments);
+    };
+})();</code></pre>
+    <h3>Hook 无限Debugger</h3>
+    <p>Firefox、Firefox Developer Edition浏览器从121版本开始，取消“Pause on debugger statement”勾选可绕过无限debugger。</p>
+    <p>常见绕过方法：</p>
+    <p>构造函数：</p>
+    <pre><code>(function () {
+    let constructorCache = Function.prototype.constructor;
+    Function.prototype.constructor = function (string) {
+        if (string === "debugger") {
+            console.log("Hook constructor debugger!");
+            return function () {};
+        }
+        return constructorCache(string);
+    };
+})();</code></pre>
+    <!-- 其他绕过方法类似，可依次添加 -->
+    <h3>Hook XHR</h3>
+    <pre><code>(function () {
+    let openCache = window.XMLHttpRequest.prototype.open;
+    window.XMLHttpRequest.prototype.open = function (method, url) {
+        console.log("Hook xhr method => %s, url => %s", method, url);
+        if (url.indexOf("baidu.com")!== -1) {
+            debugger;
+        }
+        return openCache.apply(this, arguments);
+    };
+})();</code></pre>
+    <h3>Hook fetch</h3>
+    <pre><code>(function () {
+    let fetchCache = Object.getOwnPropertyDescriptor(window, "fetch");
+    Object.defineProperty(window, "fetch", {
+        value: function (url) {
+            console.log("Hook fetch url => ", url);
+            debugger;
+            return fetchCache.value.apply(this, arguments);
+        }
+    });
+})();</code></pre>
+    <h3>Hook JSON.stringify</h3>
+    <pre><code>(function () {
+    let stringifyCache = JSON.stringify;
+    JSON.stringify = function (params) {
+        console.log("Hook JSON.stringify => ", params);
+        debugger;
+        return stringifyCache(params);
+    };
+})();</code></pre>
+    <h3>Hook JSON.parse</h3>
+    <pre><code>(function () {
+    let parseCache = JSON.parse;
+    JSON.parse = function (params) {
+        console.log("Hook JSON.parse => ", params);
+        debugger;
+        return parseCache(params);
+    };
+})();</code></pre>
+    <h3>Hook Function</h3>
+    <pre><code>(function () {
+    let FunctionCache = window.Function;
+    let newFunction = function () {
+        let src = arguments[arguments.length - 1];
+        console.log("Hook Function => ", src);
+        debugger;
+        return FunctionCache.apply(this, arguments);
+    };
+    newFunction.toString = function () {
+        return FunctionCache.toString();
+    };
+})();</code></pre>
+    <h3>Hook WebSocket</h3>
+    <pre><code>(function () {
+    let sendCache = WebSocket.prototype.send;
+    WebSocket.prototype.send = function (data) {
+        console.info("Hook WebSocket send => ", data);
+        return sendCache(data);
+    };
+})();</code></pre>
+    <h3>Hook String.prototype.split</h3>
+    <pre><code>(function () {
+    String.prototype.splitCache = String.prototype.split;
+    String.prototype.split = function (separator, limit) {
+        console.log("Hook String.prototype.split separator => %s, limit => %s", separator, limit);
+        let str = this.toString();
+        if(str.includes("baidu.com")) {
+            debugger;
+        }
+        return str.splitCache(separator, limit)
+    };
+})();</code></pre>
+    <h3>Hook console</h3>
+    <pre><code>(function () {
+    let consoleCache = console.log;
+    console.log = function (msg) {
+        consoleCache("Hook console.log =>", msg);
+        if(msg === "baidu.com") {
+            debugger;
+        }
+        consoleCache(msg);
+    };
+})();</code></pre>
+    <h3>Hook eval</h3>
+    <pre><code>(function () {
+    let evalCache = window.eval;
+    window.eval = function (string) {
+        console.log("Hook eval =>", string);
+        debugger;
+        return evalCache(string);
+    };
+    window.eval.toString = function () {
+        return evalCache.toString();
+    };
+})();</code></pre>
+    <h3>Hook onbeforeunload</h3>
+    <pre><code>(function () {
+    window.onbeforeunload = function () {
+        console.log("Hook window.onbeforeunload.");
+        debugger;
+        return false;
+    };
+})();</code></pre>
+    <h3>Hook RegExp</h3>
+    <pre><code>(function () {
+    let RegExpCache = RegExp;
+    RegExp = function (pattern, flags) {
+        console.log("Hook RegExp pattern => %s, flags => %s", pattern, flags);
+        debugger;
+        return RegExpCache(pattern, flags);
+    };
+})();</code></pre>
+    <h3>Hook Canvas</h3>
+    <pre><code>(function () {
+    let createElementCache = document.createElement;
+    document.createElement = function (tagName) {
+        console.info("Hook createElement tagName => ", tagName);
+        if(tagName === "canvas") {
+            debugger;
+        }
+        return createElementCache(tagName);
+    };
+})();</code></pre>
+    <h3>Hook createElement</h3>
+    <pre><code>(function () {
+    let createElementCache = document.createElement;
+    document.createElement = function (tagName) {
+        console.info("Hook createElement tagName => ", tagName);
+        if(tagName === "div") {
+            debugger;
+        }
+        return createElementCache(tagName);
+    };
+})();</code></pre>
+    <h3>Hook getElementById</h3>
+    <pre><code>(function () {
+    let getElementByIdCache = document.getElementById;
+    document.getElementById = function (id) {
+        console.info("Hook getElementById id => ", id);
+        if (id === "spiderapi") {
+            debugger;
+        }
+        return getElementByIdCache(id);
+    };
+})();</code></pre>
+    <h3>Hook setAttribute</h3>
+    <pre><code>(function () {
+    let setAttributeCache = window.Element.prototype.setAttribute;
+    window.Element.prototype.setAttribute = function (name, value) {
+        console.info("Hook setAttribute name => %s, value => %s", name, value);
+        if (name === "spiderapi") {
+            debugger;
+        }
+        return setAttributeCache(name, value);
+    };
+})();</code></pre>
+    <h3>Hook setInterval</h3>
+    <pre><code>(function () {
+    let setIntervalCache = setInterval;
+    setInterval = function (func, delay) {
+        console.log("Hook setInterval func => %s, delay => %s", func, delay);
+        debugger;
+        return setIntervalCache(func, delay);
+    };
+})();</code></pre>
+    <h3>Hook setTimeout</h3>
+    <pre><code>(function () {
+    let setTimeoutCache = setTimeout;
+    setTimeout = function (func, delay) {
+        console.log("Hook setTimeout func => %s, delay => %s", func, delay);
+        debugger;
+        return setTimeoutCache(func, delay);
+    };
+})();</code></pre>
+    <h3>清除定时器</h3>
+    <pre><code>for (let i = 1; i < 99999; i++) window.clearInterval(i);</code></pre>
+    <h3>Hook 固定随机变量</h3>
+    <pre><code>(function () {
+    Date.now = function now() { return 1661986251253 };
+    Date.parse = function () { return 1661986251253 };
+    Date.prototype.valueOf = function () { return 1661986251253 };
+    Date.prototype.getTime = function () { return 1661986251253 };
+    Date.prototype.toString = function () { return 1661986251253 };
+    Performance.prototype.now = function now(){ return Number('1661986251253'.slice(8))}
+
+    Math.random = function random() { return 0.08636862211354912 };
+    window.crypto.getRandomValues = function getRandomValues(array32, ...args){
+        return array32;
+    }
+})();</code></pre>
+    <h3>Hook 固定浏览器高度和宽度值</h3>
+    <pre><code>let height = 660; // 固定的高度值
+let width = 1366; // 固定的宽度值
+
+let innerHeight_property_accessor = Object.getOwnPropertyDescriptor(window, "innerHeight"); // 获取innerHeight属性访问器描述符
+let innerHeight_set_accessor = innerHeight_property_accessor.set; // 获取setter
+
+Object.defineProperty(window, "innerHeight", {
+    get: function () {
+        return height;
+    },
+    set: function () {
+        innerHeight_set_accessor.call(window, height);
+    }
+});
+
+let innerWidth_property_accessor = Object.getOwnPropertyDescriptor(window, "innerWidth"); // 获取innerWidth属性访问器描述符
+let innerWidth_set_accessor = innerWidth_property_accessor.set; // 获取setter
+
+Object.defineProperty(window, "innerWidth", {
+    get: function () {
+        return width;
+    },
+    set: function () {
+        innerWidth_set_accessor.call(window, width);
+    }
+});</code></pre>
+    <h3>Hook 通用模板</h3>
+    <pre><code>(function () {
+    let oldFunc = func;
+    func = function (arguments) {
+        console.log(arguments);
+        return oldFunc.apply(arguments);
+    };
+})();</code></pre>
+
+    <script src="power_tool3.js">      
+    </script>
+</body>
+</html>
